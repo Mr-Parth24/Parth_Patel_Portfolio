@@ -1,10 +1,9 @@
 import Section from '../layout/Section';
-import TimelineItem from '../ui/TimelineItem';
-import { experience } from '../../data/portfolioData';
+import ExperienceCarousel from '../ui/ExperienceCarousel';
 
 /**
- * ExperienceSection — Interactive vertical timeline of professional & research experience.
- * Each item uses TimelineItem component with GlowCard, connecting dots/lines, and scroll-reveal.
+ * ExperienceSection — Horizontal infinite drag-scroll carousel.
+ * Replaced vertical timeline with a classy swipeable card track.
  */
 
 export default function ExperienceSection() {
@@ -12,13 +11,9 @@ export default function ExperienceSection() {
     <Section
       id="experience"
       title="Experience"
-      subtitle="Research, professional roles, and leadership positions."
+      subtitle="Drag or swipe to explore my research, professional, and leadership roles."
     >
-      <div className="relative">
-        {experience.map((exp, index) => (
-          <TimelineItem key={`${exp.title}-${exp.organization}-${index}`} experience={exp} index={index} />
-        ))}
-      </div>
+      <ExperienceCarousel />
     </Section>
   );
 }
