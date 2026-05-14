@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion';
-import { GraduationCap, Calendar, Award } from 'lucide-react';
+import { GraduationCap, Calendar, Award, Eye } from 'lucide-react';
 import Section from '../layout/Section';
 import GlowCard from '../ui/GlowCard';
 import { education } from '../../data/portfolioData';
 import { staggerContainerVariants, fadeUpVariants } from '../../hooks/useScrollReveal';
 
 /**
- * EducationSection — Education cards with institution details, dates, and GPA.
+ * EducationSection — Education cards with diploma viewer link.
  */
 
 const accentColors: Array<'emerald' | 'blue' | 'orange' | 'violet'> = ['emerald', 'blue', 'orange', 'violet'];
@@ -23,49 +23,65 @@ export default function EducationSection() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: '-50px' }}
-        className="grid gap-6 md:grid-cols-2"
+        className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
       >
-        {education.map((edu, index) => (
-          <motion.div key={edu.institution} variants={fadeUpVariants}>
-            <GlowCard
-              glowColor={accentColors[index % accentColors.length]}
-              className="h-full"
-            >
-              {/* Icon */}
-              <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-accent-${accentColors[index % accentColors.length]}/10`}>
-                <GraduationCap size={24} className={`text-accent-${accentColors[index % accentColors.length]}`} />
-              </div>
+        {education.map((edu, index) => {
+          const color = accentColors[index % accentColors.length];
+          return (
+            <motion.div key={edu.institution} variants={fadeUpVariants}>
+              <GlowCard glowColor={color} className="h-full">
+                {/* Icon */}
+                <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-accent-${color}/10`}>
+                  <GraduationCap size={24} className={`text-accent-${color}`} />
+                </div>
 
-              {/* Degree */}
-              <h3 className="text-lg font-semibold text-text-primary">{edu.degree}</h3>
-              <p className="text-sm font-medium text-accent-emerald">{edu.field}</p>
+                {/* Degree */}
+                <h3 className="text-lg font-semibold text-text-primary">{edu.degree}</h3>
+                <p className={`text-sm font-medium text-accent-${color}`}>{edu.field}</p>
 
-              {/* Institution */}
-              <p className="mt-2 text-sm text-text-secondary">{edu.institution}</p>
+                {/* Institution */}
+                <p className="mt-2 text-sm text-text-secondary">{edu.institution}</p>
 
-              {/* Meta row */}
-              <div className="mt-3 flex flex-wrap items-center gap-4 text-xs text-text-muted">
-                <span className="inline-flex items-center gap-1">
-                  <Calendar size={12} />
-                  {edu.startDate} — {edu.endDate}
-                </span>
-                {edu.gpa && (
+                {/* Meta row */}
+                <div className="mt-3 flex flex-wrap items-center gap-4 text-xs text-text-muted">
                   <span className="inline-flex items-center gap-1">
-                    <Award size={12} />
-                    GPA: {edu.gpa}
+                    <Calendar size={12} />
+                    {edu.startDate} — {edu.endDate}
                   </span>
-                )}
-              </div>
+                  {edu.gpa && (
+                    <span className="inline-flex items-center gap-1">
+                      <Award size={12} />
+                      GPA: {edu.gpa}
+                    </span>
+                  )}
+                </div>
 
-              {/* Description */}
-              {edu.description && (
-                <p className="mt-3 text-sm leading-relaxed text-text-secondary">
-                  {edu.description}
-                </p>
-              )}
-            </GlowCard>
-          </motion.div>
-        ))}
+                {/* Description */}
+                {edu.description && (
+                  <p className="mt-3 text-sm leading-relaxed text-text-secondary">
+                    {edu.description}
+                  </p>
+                )}
+
+                {/* Diploma viewer */}
+                {edu.diplomaUrl && (
+                  <div className="mt-4 pt-4 border-t border-border">
+                    <a
+                      href={edu.diplomaUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      id={`edu-diploma-${edu.institution.toLowerCase().replace(/\s+/g, '-')}`}
+                      className={`inline-flex items-center gap-1.5 rounded-lg border border-accent-${color}/30 bg-accent-${color}/8 px-3 py-1.5 text-xs font-semibold text-accent-${color} transition-all hover:-translate-y-0.5 hover:bg-accent-${color}/15 hover:shadow-sm`}
+                    >
+                      <Eye size={13} />
+                      View Diploma
+                    </a>
+                  </div>
+                )}
+              </GlowCard>
+            </motion.div>
+          );
+        })}
       </motion.div>
     </Section>
   );

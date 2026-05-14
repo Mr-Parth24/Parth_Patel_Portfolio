@@ -28,6 +28,7 @@ export interface IPersonalInfo {
   tagline: string;
   bio: string;
   location: string;
+  resumeUrl?: string;
 }
 
 /**
@@ -53,6 +54,7 @@ export interface IEducation {
   endDate: string;
   gpa?: string;
   description?: string;
+  diplomaUrl?: string;
 }
 
 /**
@@ -143,7 +145,8 @@ export const personalInfo: IPersonalInfo = {
   phone: '(605) 592-8322',
   tagline: 'Software Developer · Researcher · Builder',
   bio: 'Computer Science graduate passionate about building cross-platform systems, embedded firmware, and intelligent applications. Experienced in research-driven engineering across computer vision, IoT, and full-stack development.',
-  location: 'South Dakota, USA',
+  location: 'Denton, TX',
+  resumeUrl: '/documents/resume/parth-patel-resume.pdf',
 };
 
 export const socialLinks: ISocialLink[] = [
@@ -159,13 +162,22 @@ export const socialLinks: ISocialLink[] = [
 
 export const education: IEducation[] = [
   {
+    institution: 'University of North Texas',
+    degree: 'Doctor of Philosophy',
+    field: 'Electrical Engineering',
+    startDate: 'Jan 2026',
+    endDate: 'Present',
+    description: 'PhD Candidate focusing on advanced research in electrical engineering, embedded systems, and intelligent device design.',
+  },
+  {
     institution: 'South Dakota State University',
     degree: 'Bachelor of Science',
     field: 'Computer Science',
-    startDate: 'Jan 2023',
+    startDate: 'Aug 2023',
     endDate: 'Dec 2025',
     gpa: '3.5',
     description: 'Graduated December 2025. Focus areas include embedded systems, computer vision, and software engineering.',
+    diplomaUrl: '/documents/diploma/sdsu-diploma.pdf',
   },
   {
     institution: 'Chandigarh University',
@@ -200,18 +212,32 @@ export const skillCategories: ISkillCategory[] = [
 
 export const experience: IExperience[] = [
   {
+    title: 'Graduate Research Assistant',
+    organization: 'University of North Texas',
+    department: 'Department of Electrical Engineering',
+    startDate: 'Jan 2026',
+    endDate: '',
+    bullets: [
+      'Conducting advanced research in electrical engineering as part of a PhD program, applying cross-disciplinary expertise in embedded systems, signal processing, and intelligent device design.',
+      'Collaborating with faculty and research teams to develop novel solutions bridging hardware and software in applied engineering contexts.',
+      'Leveraging prior experience in firmware engineering, IoT systems, and cross-platform application development to accelerate research outcomes.',
+    ],
+    tags: ['PhD Research', 'Electrical Engineering', 'Embedded Systems', 'IoT'],
+    accentColor: 'emerald',
+  },
+  {
     title: 'Undergraduate Research Assistant',
     organization: 'South Dakota State University',
-    department: 'Integrated Sensing Circuits and Systems Laboratory',
+    department: 'Integrated Sensing Circuits & Systems Laboratory',
     startDate: 'Aug 2025',
     endDate: 'Dec 2025',
     bullets: [
-      'Developed end-to-end data ecosystems for custom lab medical devices using embedded firmware, Java-based Android apps, and Python PC GUIs for real-time visualization.',
-      'Managed hardware assembly, hand-soldering, and engineered cross-platform interfaces for electrochemical data capture (Potentiometry, Impedance).',
-      'Programmed STM32 and Arduino microcontrollers; integrated Nordic BLE and UART multi-protocol data transmissions.',
+      'Built an end-to-end data ecosystem for a custom lab-developed medical Edema Monitoring device — spanning embedded firmware, a Java Android app, and a Python PC GUI for real-time patient data visualization.',
+      'Managed hardware-level assembly and hand-soldering of AED units; engineered cross-platform interfaces to capture and graph complex electrochemical data including Potentiometry and Impedance.',
+      'Programmed STM32 and Arduino microcontrollers for on-device calculations; integrated Nordic BLE for mobile sync and UART for PC-based graphical interfaces.',
     ],
-    tags: ['Embedded', 'Android', 'Python', 'BLE', 'STM32'],
-    accentColor: 'emerald',
+    tags: ['STM32', 'Arduino', 'Android', 'Python', 'BLE', 'UART', 'Embedded'],
+    accentColor: 'blue',
   },
   {
     title: 'Undergraduate Research Assistant',
@@ -220,11 +246,40 @@ export const experience: IExperience[] = [
     startDate: 'May 2025',
     endDate: 'Aug 2025',
     bullets: [
-      'Developed GPS-independent navigation systems using Intel RealSense depth sensors, ArUco markers, and SLAM algorithms.',
-      'Automated document AI pipelines to parse research tables into structured text and optimized image-to-text workflows.',
+      'Developed a GPS-independent autonomous navigation system using Intel RealSense depth sensors and ArUco markers; implemented SLAM algorithms to calculate field boundaries for automated equipment.',
+      'Automated research paper table extraction into structured text using trained Document AI models, significantly reducing manual data entry time for the lab.',
+      'Streamlined image-to-text pipelines to improve tabular data recognition accuracy, facilitating faster research synthesis across the team.',
     ],
-    tags: ['Computer Vision', 'SLAM', 'RealSense', 'Document AI'],
-    accentColor: 'blue',
+    tags: ['Computer Vision', 'SLAM', 'Intel RealSense', 'Document AI', 'Python'],
+    accentColor: 'violet',
+  },
+  {
+    title: 'Webmaster',
+    organization: 'South Dakota State University',
+    department: 'Electrical Engineering & Computer Science Department',
+    startDate: 'Oct 2024',
+    endDate: 'Dec 2025',
+    bullets: [
+      'Managed the EECS department website, ensuring all content was accurate, up-to-date, and visually engaging for prospective students and faculty.',
+      'Developed and maintained new web pages to promote academic programs, research highlights, and department news.',
+      'Enhanced the user experience through ongoing accessibility improvements, optimizing for readability and navigation across devices.',
+    ],
+    tags: ['Web Development', 'UI/UX', 'Accessibility', 'Content Management'],
+    accentColor: 'orange',
+  },
+  {
+    title: 'Social Media Manager',
+    organization: 'South Dakota State University',
+    department: 'Electrical Engineering & Computer Science Department',
+    startDate: 'Oct 2024',
+    endDate: 'Dec 2025',
+    bullets: [
+      'Spearheaded social media strategies across LinkedIn, Instagram, X, and Facebook — driving engagement and raising the department\'s digital visibility.',
+      'Curated and created content spotlighting faculty research, student achievements, and department milestones aligned with institutional branding.',
+      'Tracked social media metrics and engagement data, adjusting strategies to optimize reach and impact across all platforms.',
+    ],
+    tags: ['Social Media', 'Content Strategy', 'Analytics', 'Brand Management'],
+    accentColor: 'rose',
   },
   {
     title: 'Undergraduate Research Assistant',
@@ -233,60 +288,63 @@ export const experience: IExperience[] = [
     startDate: 'May 2024',
     endDate: 'Aug 2024',
     bullets: [
-      'Built a custom Flutter mobile application to automate field data collection and leaf rust analysis.',
-      'Designed, developed, and launched the laboratory\'s public web presence to showcase research milestones.',
+      'Developed a custom Flutter mobile application to replace a time-intensive manual field entry process — featuring high-resolution image uploads and automated CSV generation for leaf rust analysis.',
+      'Collaborated on barley leaf rust resistance studies; managed bacterial culture cultivation and performed controlled inoculations to observe and record infection levels.',
+      'Designed and launched the laboratory\'s website to showcase research findings, faculty profiles, and project milestones, greatly improving the lab\'s professional presence.',
     ],
-    tags: ['Flutter', 'Mobile Dev', 'Web Design'],
-    accentColor: 'orange',
+    tags: ['Flutter', 'Mobile Dev', 'Web Design', 'Research', 'Data Collection'],
+    accentColor: 'blue',
   },
   {
-    title: 'Webmaster',
+    title: 'eSport Desk Attendant',
     organization: 'South Dakota State University',
-    department: 'EECS Department',
-    startDate: 'Oct 2024',
-    endDate: 'Dec 2025',
+    startDate: 'Mar 2024',
+    endDate: 'Oct 2024',
     bullets: [
-      'Managed departmental websites, designed promotional pages for academic programs, and optimized UI for web accessibility.',
+      'Managed front desk operations by checking in students, verifying IDs, and assigning gaming stations based on individual preferences and availability.',
+      'Provided technical support by troubleshooting gaming consoles and equipment, ensuring minimal downtime and a smooth experience for all users.',
+      'Promoted an inclusive, welcoming gaming community — assisting students with eSports events, tournaments, equipment setup, and game mechanics.',
     ],
-    tags: ['Web Dev', 'UI/UX', 'Accessibility'],
-    accentColor: 'violet',
-  },
-  {
-    title: 'Social Media Manager',
-    organization: 'South Dakota State University',
-    department: 'EECS Department',
-    startDate: 'Oct 2024',
-    endDate: 'Dec 2025',
-    bullets: [
-      'Curated visual content strategies across LinkedIn, Instagram, X, and Facebook, monitoring performance analytics.',
-    ],
-    tags: ['Social Media', 'Content Strategy', 'Analytics'],
-    accentColor: 'rose',
-  },
-  {
-    title: 'Treasurer',
-    organization: 'Indian Students\' Association, SDSU',
-    department: 'Leadership',
-    startDate: 'Oct 2023',
-    endDate: 'Dec 2025',
-    bullets: [
-      'Managed financial budgets for a 200+ member organization and coordinated major cultural productions (300+ attendees).',
-    ],
-    tags: ['Leadership', 'Finance', 'Event Management'],
+    tags: ['Operations', 'Technical Support', 'Customer Service', 'Community'],
     accentColor: 'emerald',
   },
   {
-    title: 'Additional Roles',
-    organization: 'Various',
-    startDate: '',
-    endDate: '',
+    title: 'Student Worker',
+    organization: 'Larson Manufacturing',
+    startDate: 'Sep 2023',
+    endDate: 'May 2024',
     bullets: [
-      'eSport Desk Attendant — South Dakota State University',
-      'Student Worker — Larson Manufacturing',
-      'Social Media Manager & Content Creator — V Fitness',
+      'Assisted with store management and customer support, ensuring a seamless and positive shopping experience for customers.',
+      'Contributed to sales operations, stock management, and inventory control to maintain efficient and organized store workflows.',
     ],
-    tags: ['Customer Service', 'Content Creation'],
-    accentColor: 'blue',
+    tags: ['Operations', 'Customer Service', 'Inventory Management'],
+    accentColor: 'orange',
+  },
+  {
+    title: 'Treasurer',
+    organization: "Indian Students' Association, SDSU",
+    department: 'Student Leadership',
+    startDate: 'Oct 2023',
+    endDate: 'Dec 2025',
+    bullets: [
+      'Managed organizational budget and all financial operations for a 200+ member student association over two years.',
+      'Led fundraising initiatives and coordinated India Night — a major cultural event with 300+ attendees — handling sponsorships, ticket sales, performances, and catering logistics.',
+    ],
+    tags: ['Leadership', 'Finance', 'Event Management', 'Fundraising'],
+    accentColor: 'violet',
+  },
+  {
+    title: 'Social Media Manager & Content Creator',
+    organization: 'V Fitness',
+    startDate: 'Jun 2022',
+    endDate: 'Jul 2023',
+    bullets: [
+      'Increased online engagement and brand presence through strategic content creation and targeted digital marketing campaigns across multiple platforms.',
+      'Led digital campaigns to raise brand awareness, attract new clients, and align content with the gym\'s broader marketing strategy.',
+      'Developed security protocols for social media accounts to safeguard sensitive client and business information.',
+    ],
+    tags: ['Content Creation', 'Digital Marketing', 'Brand Strategy', 'Social Media'],
+    accentColor: 'rose',
   },
 ];
 
@@ -318,6 +376,13 @@ export const certifications: ICertification[] = [
     name: 'Mastercard Cybersecurity Job Simulation',
     issuer: 'Forage',
     date: '2024',
+    credentialUrl: '/documents/certificates/cybersecurity-job-simulation.pdf',
+  },
+  {
+    name: 'AI Horizon 2026 — Volunteer',
+    issuer: 'Society for Student AI Innovation (SSAI)',
+    date: '2025',
+    credentialUrl: '/documents/certificates/ssai-volunteer-certificate.pdf',
   },
 ];
 

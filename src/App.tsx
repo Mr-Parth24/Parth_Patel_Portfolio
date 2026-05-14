@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import HeroSection from './components/sections/HeroSection';
@@ -35,9 +36,33 @@ import GallerySection from './components/sections/GallerySection';
  * ═══════════════════════════════════════════════════════════════
  */
 
+function ScrollProgressBar() {
+  const [pct, setPct] = useState(0);
+  useEffect(() => {
+    const onScroll = () => {
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      setPct(total > 0 ? (window.scrollY / total) * 100 : 0);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+  return (
+    <div className="fixed top-0 left-0 right-0 z-[60] h-[3px] bg-transparent">
+      <div
+        className="h-full transition-none"
+        style={{
+          width: `${pct}%`,
+          background: 'linear-gradient(90deg, #10B981, #3B82F6, #8B5CF6)',
+        }}
+      />
+    </div>
+  );
+}
+
 export default function App() {
   return (
     <div className="min-h-screen bg-surface">
+      <ScrollProgressBar />
       <Navbar />
 
       <main>
