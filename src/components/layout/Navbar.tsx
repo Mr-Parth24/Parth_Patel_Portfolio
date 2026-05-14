@@ -72,8 +72,13 @@ export default function Navbar() {
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="group flex items-center gap-2"
         >
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent-emerald text-sm font-bold text-text-inverse transition-transform duration-200 group-hover:scale-110">
-            PP
+          {/* Memoji avatar replacing the "PP" text badge */}
+          <span className="relative flex h-9 w-9 shrink-0 overflow-hidden rounded-full ring-2 ring-accent-emerald/50 transition-all duration-200 group-hover:ring-accent-emerald group-hover:scale-110">
+            <img
+              src="/images/avatar.jpg"
+              alt="Parth Patel avatar"
+              className="h-full w-full object-cover object-center"
+            />
           </span>
           <span className="text-lg font-semibold text-text-primary">
             {personalInfo.firstName}
