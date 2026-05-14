@@ -61,7 +61,7 @@ function ScrollProgressBar() {
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-surface">
+    <div className="min-h-screen bg-surface overflow-x-hidden">
       <ScrollProgressBar />
       <Navbar />
 

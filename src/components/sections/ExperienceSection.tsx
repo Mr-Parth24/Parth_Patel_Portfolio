@@ -21,16 +21,12 @@ const ACCENT_LIGHT: Record<AccentColor, string> = {
   rose: '#FFE4E6',
 };
 
-const CARD_W = 420;
-const GAP = 28;
-const UNIT = CARD_W + GAP;
-
 const items: IExperience[] = experience;
 const N = items.length;
 const tripled = [...items, ...items, ...items];
 
 // ─── Single Card ─────────────────────────────────────────────────────────────
-function ExpCard({ exp, isActive }: { exp: IExperience; isActive: boolean }) {
+function ExpCard({ exp, isActive, cardW }: { exp: IExperience; isActive: boolean; cardW: number }) {
   const color = (exp.accentColor ?? 'emerald') as AccentColor;
   const hex = ACCENT_HEX[color];
   const light = ACCENT_LIGHT[color];
@@ -39,7 +35,7 @@ function ExpCard({ exp, isActive }: { exp: IExperience; isActive: boolean }) {
     <motion.div
       animate={{ scale: isActive ? 1 : 0.88, opacity: isActive ? 1 : 0.42 }}
       transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
-      style={{ width: CARD_W, flexShrink: 0 }}
+      style={{ width: cardW, flexShrink: 0 }}
       className="select-none"
     >
       <div
@@ -122,6 +118,10 @@ function ExpCard({ exp, isActive }: { exp: IExperience; isActive: boolean }) {
 export default function ExperienceSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerW, setContainerW] = useState(800);
+  const [cardW, setCardW] = useState(420);
+  const gap = 28;
+  const unit = cardW + gap;
+
   const [virtualIdx, setVirtualIdx] = useState(0);
   const [activeIdx, setActiveIdx] = useState(0);
   const [hinted, setHinted] = useState(false);
@@ -132,17 +132,23 @@ export default function ExperienceSection() {
 
   // Center offset: positions active card at viewport center
   const xFor = useCallback(
-    (vi: number) => containerW / 2 - CARD_W / 2 - (N + vi) * UNIT,
-    [containerW],
+    (vi: number) => containerW / 2 - cardW / 2 - (N + vi) * unit,
+    [containerW, cardW, unit],
   );
 
   // Measure container
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-    const ro = new ResizeObserver(() => setContainerW(el.offsetWidth));
+    const ro = new ResizeObserver(() => {
+      const cw = el.offsetWidth;
+      setContainerW(cw);
+      setCardW(Math.min(420, cw - 48)); // Leave padding on mobile
+    });
     ro.observe(el);
-    setContainerW(el.offsetWidth);
+    const cw = el.offsetWidth;
+    setContainerW(cw);
+    setCardW(Math.min(420, cw - 48));
     return () => ro.disconnect();
   }, []);
 
@@ -156,7 +162,7 @@ export default function ExperienceSection() {
       let raw = N + vi;
       if (raw < 1) { vi += N; raw += N; }
       if (raw >= N * 2) { vi -= N; raw -= N; }
-      animate(x, containerW / 2 - CARD_W / 2 - raw * UNIT, {
+      animate(x, containerW / 2 - cardW / 2 - raw * unit, {
         type: 'spring',
         stiffness: 300,
         damping: 34,
@@ -164,7 +170,7 @@ export default function ExperienceSection() {
       setVirtualIdx(vi);
       setActiveIdx(((vi % N) + N) % N);
     },
-    [x, containerW],
+    [x, containerW, cardW, unit],
   );
 
   const next = useCallback(() => snapTo(virtualIdx + 1), [snapTo, virtualIdx]);
@@ -185,11 +191,11 @@ export default function ExperienceSection() {
       const { velocity: { x: vx }, offset: { x: ox } } = info;
       let delta = 0;
       if (Math.abs(vx) > 300) delta = vx < 0 ? 1 : -1;
-      else if (ox < -UNIT * 0.22) delta = 1;
-      else if (ox > UNIT * 0.22) delta = -1;
+      else if (ox < -unit * 0.22) delta = 1;
+      else if (ox > unit * 0.22) delta = -1;
       snapTo(virtualIdx + delta);
     },
-    [virtualIdx, snapTo],
+    [virtualIdx, snapTo, unit],
   );
 
   const dotGoTo = useCallback(
@@ -197,7 +203,7 @@ export default function ExperienceSection() {
     [virtualIdx, activeIdx, snapTo],
   );
 
-  const trackW = tripled.length * UNIT;
+  const trackW = tripled.length * unit;
 
   return (
     <section
@@ -265,7 +271,7 @@ export default function ExperienceSection() {
             {tripled.map((exp, i) => {
               const tripledActive = N + virtualIdx;
               return (
-                <ExpCard key={i} exp={exp} isActive={i === tripledActive} />
+                <ExpCard key={i} exp={exp} isActive={i === tripledActive} cardW={cardW} />
               );
             })}
           </motion.div>

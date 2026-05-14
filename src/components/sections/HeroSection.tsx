@@ -204,8 +204,7 @@ export default function HeroSection() {
             </div>
 
             {/* Photo container — circular crop */}
-            <div className="relative overflow-hidden rounded-full border-[3px] border-white/60 shadow-2xl"
-              style={{ width: 300, height: 300 }}>
+            <div className="relative overflow-hidden rounded-full border-[3px] border-white/60 shadow-2xl h-56 w-56 sm:h-72 sm:w-72 md:h-80 md:w-80">
               <img
                 src="/images/parth.jpg"
                 alt="Parth Patel"
@@ -226,10 +225,10 @@ export default function HeroSection() {
             <motion.div
               animate={{ y: [0, -6, 0] }}
               transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
-              className="absolute -top-3 -right-4 flex items-center gap-1.5 rounded-full border border-border bg-surface-card px-3 py-1.5 shadow-lg text-xs font-semibold"
+              className="absolute -top-2 -right-2 sm:-top-3 sm:-right-4 flex items-center gap-1.5 rounded-full border border-border bg-surface-card px-2 py-1 sm:px-3 sm:py-1.5 shadow-lg text-[10px] sm:text-xs font-semibold"
               style={{ color: '#10B981' }}
             >
-              <GraduationCap size={13} />
+              <GraduationCap className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
               PhD Candidate
             </motion.div>
 
@@ -237,10 +236,10 @@ export default function HeroSection() {
             <motion.div
               animate={{ y: [0, 6, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-              className="absolute -bottom-3 -left-6 flex items-center gap-1.5 rounded-full border border-border bg-surface-card px-3 py-1.5 shadow-lg text-xs font-semibold"
+              className="absolute -bottom-2 -left-4 sm:-bottom-3 sm:-left-6 flex items-center gap-1.5 rounded-full border border-border bg-surface-card px-2 py-1 sm:px-3 sm:py-1.5 shadow-lg text-[10px] sm:text-xs font-semibold"
               style={{ color: '#3B82F6' }}
             >
-              <Briefcase size={13} />
+              <Briefcase className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
               Open to Work
             </motion.div>
 
