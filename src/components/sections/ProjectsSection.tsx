@@ -4,6 +4,7 @@ import Section from '../layout/Section';
 import TiltCard from '../ui/TiltCard';
 import { projects } from '../../data/portfolioData';
 import { staggerContainerVariants, fadeUpVariants } from '../../hooks/useScrollReveal';
+import { accentIconText, accentIconTile, portfolioAccent } from '../../utils/portfolioAccentClasses';
 
 /**
  * ProjectsSection — Tilt-card project showcase grid.
@@ -38,12 +39,16 @@ export default function ProjectsSection() {
         viewport={{ once: true, margin: '-50px' }}
         className="grid gap-6 md:grid-cols-2"
       >
-        {projects.map((project) => (
-          <motion.div key={project.name} variants={fadeUpVariants}>
-            <TiltCard glowColor={project.accentColor || 'emerald'} className="h-full">
+        {projects.map((project) => {
+          const accent = portfolioAccent(project.accentColor);
+          return (
+          <motion.div key={project.name} variants={fadeUpVariants} className="min-w-0">
+            <TiltCard glowColor={accent} className="h-full">
               {/* Icon Header */}
-              <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-accent-${project.accentColor || 'emerald'}/10`}>
-                <Layers size={24} className={`text-accent-${project.accentColor || 'emerald'}`} />
+              <div
+                className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl ${accentIconTile[accent]}`}
+              >
+                <Layers size={24} className={accentIconText[accent]} />
               </div>
 
               {/* Title & Description */}
@@ -89,7 +94,8 @@ export default function ProjectsSection() {
               </div>
             </TiltCard>
           </motion.div>
-        ))}
+          );
+        })}
       </motion.div>
 
       {/* ═══════════════════════════════════════════════════════════

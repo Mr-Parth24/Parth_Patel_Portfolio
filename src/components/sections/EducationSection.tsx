@@ -4,6 +4,12 @@ import Section from '../layout/Section';
 import GlowCard from '../ui/GlowCard';
 import { education } from '../../data/portfolioData';
 import { staggerContainerVariants, fadeUpVariants } from '../../hooks/useScrollReveal';
+import {
+  accentIconText,
+  accentIconTile,
+  educationDiplomaLink,
+  type PortfolioAccent,
+} from '../../utils/portfolioAccentClasses';
 
 /**
  * EducationSection — Education cards with diploma viewer link.
@@ -26,18 +32,18 @@ export default function EducationSection() {
         className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
       >
         {education.map((edu, index) => {
-          const color = accentColors[index % accentColors.length];
+          const color = accentColors[index % accentColors.length] as PortfolioAccent;
           return (
             <motion.div key={edu.institution} variants={fadeUpVariants}>
               <GlowCard glowColor={color} className="h-full">
                 {/* Icon */}
-                <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-accent-${color}/10`}>
-                  <GraduationCap size={24} className={`text-accent-${color}`} />
+                <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl ${accentIconTile[color]}`}>
+                  <GraduationCap size={24} className={accentIconText[color]} />
                 </div>
 
                 {/* Degree */}
                 <h3 className="text-lg font-semibold text-text-primary">{edu.degree}</h3>
-                <p className={`text-sm font-medium text-accent-${color}`}>{edu.field}</p>
+                <p className={`text-sm font-medium ${accentIconText[color]}`}>{edu.field}</p>
 
                 {/* Institution */}
                 <p className="mt-2 text-sm text-text-secondary">{edu.institution}</p>
@@ -71,7 +77,7 @@ export default function EducationSection() {
                       target="_blank"
                       rel="noopener noreferrer"
                       id={`edu-diploma-${edu.institution.toLowerCase().replace(/\s+/g, '-')}`}
-                      className={`inline-flex items-center gap-1.5 rounded-lg border border-accent-${color}/30 bg-accent-${color}/8 px-3 py-1.5 text-xs font-semibold text-accent-${color} transition-all hover:-translate-y-0.5 hover:bg-accent-${color}/15 hover:shadow-sm`}
+                      className={educationDiplomaLink[color]}
                     >
                       <Eye size={13} />
                       View Diploma

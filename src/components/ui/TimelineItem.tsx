@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Calendar, MapPin } from 'lucide-react';
 import type { IExperience } from '../../data/portfolioData';
+import { accentDotBg, portfolioAccent } from '../../utils/portfolioAccentClasses';
 import GlowCard from './GlowCard';
 
 /**
@@ -19,6 +20,7 @@ interface TimelineItemProps {
 
 export default function TimelineItem({ experience, index }: TimelineItemProps) {
   const isLeft = index % 2 === 0;
+  const accent = portfolioAccent(experience.accentColor);
 
   return (
     <motion.div
@@ -32,11 +34,13 @@ export default function TimelineItem({ experience, index }: TimelineItemProps) {
       <div className="absolute top-0 bottom-0 left-3.5 w-px bg-border lg:left-1/2 lg:-translate-x-1/2" />
 
       {/* Timeline Dot */}
-      <div className={`absolute top-1 left-1.5 z-10 h-5 w-5 rounded-full border-[3px] border-surface bg-accent-${experience.accentColor || 'emerald'} lg:left-1/2 lg:-translate-x-1/2`} />
+      <div
+        className={`absolute top-1 left-1.5 z-10 h-5 w-5 rounded-full border-[3px] border-surface lg:left-1/2 lg:-translate-x-1/2 ${accentDotBg[accent]}`}
+      />
 
       {/* Content Card */}
       <div className={`lg:w-[calc(50%-2rem)] ${isLeft ? 'lg:mr-auto lg:pr-0' : 'lg:ml-auto lg:pl-0'}`}>
-        <GlowCard glowColor={experience.accentColor || 'emerald'} glowPosition={isLeft ? 'top-right' : 'top-left'}>
+        <GlowCard glowColor={accent} glowPosition={isLeft ? 'top-right' : 'top-left'}>
           {/* Header */}
           <div className="mb-3">
             <h3 className="text-lg font-semibold text-text-primary">{experience.title}</h3>

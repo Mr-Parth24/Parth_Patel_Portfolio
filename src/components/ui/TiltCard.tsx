@@ -46,7 +46,7 @@ export default function TiltCard({
         style={{ rotateX, rotateY, scale, transformStyle: 'preserve-3d' }}
         onMouseMove={onMouseMove}
         onMouseLeave={onMouseLeave}
-        className={`group relative overflow-hidden rounded-xl border border-border bg-surface-card p-6 shadow-sm transition-colors duration-300 hover:border-border-strong ${className}`}
+        className={`group relative overflow-hidden rounded-xl border border-border bg-surface-card p-5 shadow-sm transition-colors duration-300 hover:border-border-strong sm:p-6 ${className}`}
       >
         {/* Ambient glow backdrop */}
         <div

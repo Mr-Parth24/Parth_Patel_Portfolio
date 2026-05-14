@@ -50,7 +50,7 @@ function ExpCard({ exp, isActive, cardW }: { exp: IExperience; isActive: boolean
         {/* Accent top bar */}
         <div style={{ height: 3, background: `linear-gradient(90deg, ${hex}, ${hex}44)` }} />
 
-        <div className="p-7">
+        <div className="p-4 sm:p-6 md:p-7">
           {/* Org badge */}
           <div
             className="mb-4 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold"
@@ -256,13 +256,12 @@ export default function ExperienceSection() {
       <div className="relative">
         <div
           ref={containerRef}
-          className="overflow-hidden"
-          style={{ cursor: isDragging.current ? 'grabbing' : 'grab' }}
+          className="cursor-grab overflow-hidden active:cursor-grabbing"
         >
           <motion.div
             drag="x"
-            style={{ x, width: trackW, display: 'flex', gap: gap }}
-            dragConstraints={{ left: -trackW, right: trackW }}
+            style={{ x, width: trackW, display: 'flex', gap: gap, touchAction: 'pan-x' }}
+            dragConstraints={containerRef}
             dragElastic={0.04}
             onDragStart={() => { isDragging.current = true; setHinted(true); }}
             onDragEnd={onDragEnd}
@@ -298,7 +297,7 @@ export default function ExperienceSection() {
           id="exp-prev"
           onClick={prev}
           aria-label="Previous experience"
-          className="absolute left-4 top-1/2 z-20 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full border border-border bg-surface-card/90 shadow-md backdrop-blur-sm transition-all hover:border-accent-emerald/50 hover:text-accent-emerald hover:shadow-lg sm:left-8"
+          className="absolute left-1 top-1/2 z-20 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-surface-card/90 shadow-md backdrop-blur-sm transition-all hover:border-accent-emerald/50 hover:text-accent-emerald hover:shadow-lg sm:left-4 sm:h-11 sm:w-11 md:left-8"
         >
           <ChevronLeft size={20} />
         </button>
@@ -306,7 +305,7 @@ export default function ExperienceSection() {
           id="exp-next"
           onClick={next}
           aria-label="Next experience"
-          className="absolute right-4 top-1/2 z-20 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full border border-border bg-surface-card/90 shadow-md backdrop-blur-sm transition-all hover:border-accent-emerald/50 hover:text-accent-emerald hover:shadow-lg sm:right-8"
+          className="absolute right-1 top-1/2 z-20 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-surface-card/90 shadow-md backdrop-blur-sm transition-all hover:border-accent-emerald/50 hover:text-accent-emerald hover:shadow-lg sm:right-4 sm:h-11 sm:w-11 md:right-8"
         >
           <ChevronRight size={20} />
         </button>

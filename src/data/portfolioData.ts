@@ -156,7 +156,7 @@ export const socialLinks: ISocialLink[] = [
    */
   { platform: 'LinkedIn', url: 'https://www.linkedin.com/in/mr-parth24', iconName: 'Linkedin' },
   { platform: 'GitHub', url: 'https://github.com/Mr-Parth24', iconName: 'Github' },
-  { platform: 'Instagram', url: 'https://instagram.com/', iconName: 'Instagram' },
+  { platform: 'Instagram', url: 'https://www.instagram.com/parth__787898/', iconName: 'Instagram' },
   { platform: 'Email', url: 'mailto:mr.parth24@gmail.com', iconName: 'Mail' },
 ];
 

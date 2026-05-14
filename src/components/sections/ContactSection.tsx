@@ -33,24 +33,24 @@ export default function ContactSection() {
             </p>
 
             {/* Contact Details */}
-            <div className="mb-8 flex flex-wrap items-center justify-center gap-6 text-sm text-text-secondary">
+            <div className="mb-8 flex max-w-full flex-col items-center justify-center gap-4 text-sm text-text-secondary sm:flex-row sm:flex-wrap sm:gap-6">
               <a
                 href={`mailto:${personalInfo.email}`}
-                className="inline-flex items-center gap-2 transition-colors hover:text-accent-emerald"
+                className="inline-flex max-w-full items-center gap-2 break-words text-center transition-colors hover:text-accent-emerald"
               >
-                <Mail size={16} />
-                {personalInfo.email}
+                <Mail size={16} className="shrink-0" />
+                <span className="min-w-0 break-all">{personalInfo.email}</span>
               </a>
               <a
                 href={`tel:${personalInfo.phone.replace(/[^\d+]/g, '')}`}
-                className="inline-flex items-center gap-2 transition-colors hover:text-accent-emerald"
+                className="inline-flex max-w-full items-center gap-2 break-words transition-colors hover:text-accent-emerald"
               >
-                <Phone size={16} />
+                <Phone size={16} className="shrink-0" />
                 {personalInfo.phone}
               </a>
-              <span className="inline-flex items-center gap-2">
-                <MapPin size={16} />
-                {personalInfo.location}
+              <span className="inline-flex max-w-full items-center gap-2 text-center">
+                <MapPin size={16} className="shrink-0" />
+                <span className="min-w-0">{personalInfo.location}</span>
               </span>
             </div>
 

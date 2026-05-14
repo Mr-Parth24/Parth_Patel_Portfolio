@@ -17,6 +17,16 @@ export default function Navbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
 
+  // Lock document scroll when mobile drawer is open (avoids background scroll / jank)
+  useEffect(() => {
+    if (!isMobileOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [isMobileOpen]);
+
   // Track scroll position for glass effect
   useEffect(() => {
     const handleScroll = () => {
@@ -60,7 +70,7 @@ export default function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-      className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 right-0 left-0 z-50 pt-[env(safe-area-inset-top,0px)] transition-all duration-300 ${
         isScrolled
           ? 'glass border-b border-border shadow-sm'
           : 'bg-transparent'
@@ -70,19 +80,17 @@ export default function Navbar() {
         {/* Logo / Name */}
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="group flex items-center gap-2"
+          className="group flex min-w-0 max-w-[calc(100vw-8rem)] items-center gap-2 sm:max-w-none sm:gap-2.5"
         >
-          {/* Memoji avatar replacing the "PP" text badge */}
-          <span className="relative flex h-9 w-9 shrink-0 overflow-hidden rounded-full ring-2 ring-accent-emerald/50 transition-all duration-200 group-hover:ring-accent-emerald group-hover:scale-110">
+          <span className="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-full ring-2 ring-accent-emerald/50 transition-all duration-200 group-hover:ring-accent-emerald group-hover:scale-110 sm:h-9 sm:w-9">
             <img
               src="/images/avatar.jpg"
               alt="Parth Patel avatar"
               className="h-full w-full object-cover object-center"
             />
           </span>
-          <span className="text-lg font-semibold text-text-primary">
-            {personalInfo.firstName}
-            <span className="text-accent-emerald">.</span>
+          <span className="truncate text-left text-sm font-semibold tracking-tight text-text-primary sm:text-lg">
+            {personalInfo.name}
           </span>
         </button>
 

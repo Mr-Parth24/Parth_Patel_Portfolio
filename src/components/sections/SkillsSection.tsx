@@ -43,8 +43,8 @@ export default function SkillsSection() {
       </motion.div>
 
       {/* Infinite marquee strips */}
-      <div className="relative overflow-hidden rounded-2xl border border-border bg-surface-card py-4 space-y-3"
-        style={{ maskImage: 'linear-gradient(to right, transparent, black 12%, black 88%, transparent)' }}>
+      <div className="relative w-full max-w-full overflow-hidden rounded-2xl border border-border bg-surface-card py-4 space-y-3"
+        style={{ maskImage: 'linear-gradient(to right, transparent, black 8%, black 92%, transparent)' }}>
 
         {/* Row 1 — scrolls left */}
         <div className="flex gap-3" style={{ animation: 'marquee-left 28s linear infinite', width: 'max-content' }}>

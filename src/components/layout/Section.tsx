@@ -37,7 +37,7 @@ export default function Section({
         initial="hidden"
         animate={isVisible ? 'visible' : 'hidden'}
         variants={fadeUpVariants}
-        className={fullWidth ? 'w-full' : 'mx-auto max-w-6xl px-4 sm:px-6 lg:px-8'}
+        className={fullWidth ? 'w-full min-w-0' : 'mx-auto min-w-0 max-w-6xl px-4 sm:px-6 lg:px-8'}
       >
         {(title || subtitle) && (
           <div className="mb-12 text-center lg:mb-16">

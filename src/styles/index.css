@@ -217,8 +217,9 @@
   }
 
   .section-padding {
-    padding-top: var(--spacing-section);
-    padding-bottom: var(--spacing-section);
+    /* Fluid vertical rhythm: tighter on phones, full spacing on large screens */
+    padding-top: clamp(2.75rem, 6vw + 1rem, var(--spacing-section));
+    padding-bottom: clamp(2.75rem, 6vw + 1rem, var(--spacing-section));
   }
 
   .perspective-1000 {
