@@ -261,7 +261,7 @@ export default function ExperienceSection() {
         >
           <motion.div
             drag="x"
-            style={{ x, width: trackW, display: 'flex', gap: GAP }}
+            style={{ x, width: trackW, display: 'flex', gap: gap }}
             dragConstraints={{ left: -trackW, right: trackW }}
             dragElastic={0.04}
             onDragStart={() => { isDragging.current = true; setHinted(true); }}
